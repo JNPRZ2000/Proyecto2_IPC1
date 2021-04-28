@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Registrarme</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/marathon.png' %}">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/registro.css' %}">
+    <script type="text/javascript" src="{% static 'js/registro.js' %}"></script>
+
+</head>
+<body>
+    <header id="encabezado">
+        <a href="{% url 'login' %}">
+            <div id="head-desc">
+                <span id="nam-site">Hospital Universitario</span>
+                <span id="des-site">Existiendo por la salud de todos</span>
+            </div>
+        </a>
+        <a id="link-register" href="{% url 'login' %}">Ingresar</a>
+        
+    </header>
+
+    <form id="formulario" action="" method="POST">{% csrf_token %}
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required title="Ingrese su Nombre">
+        <input type="text" name="apellido" id="apellido" placeholder="Apellido" required title="Ingrese su Apellido">
+        <legend>Fecha de nacimiento</legend>
+        <input type="date" name="nacimiento" id="nacimiento" required title="Ingrese su fecha de nacimiento">
+        <select name="sexo" id="sexo">
+            <option value="nulo" selected disabled>sexo</option>
+            <option value="F">Femenino</option>
+            <option value="M">Masculino</option>
+        </select>
+        <input type="number" name="telefono" id="telefono" placeholder="Teléfono">
+        <input type="text" name="usuario" id="usuario" placeholder="Usuario" 
+        required title="Ingrese su Usuario">
+        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" minlength="8" required title="Ingrese una contraseña con al menos 8 caracteres">
+        <input type="button" value="Ingresar" id="enviar" onclick="registrar()">
+    </form>
+
+    <img src="{% static 'img/woh.png' %}" alt="woh.png">
+    <footer id="pie">
+        <div id="contacto">
+            <ul>
+                <li id="liCo">Contactenos</li>
+                <li id="liCo"><a id="aMail" href="mailto:jn612perez@gmail.com">Correo</a></li>
+                <li id="liCo"><a id="aMail" href="https://www.facebook.com/USACFacultadDeIngenieria" target="_blank">Facebook</a></li>
+                <li id="liCo"><a id="aMail" href="https://www.instagram.com/fiusac/?hl=es" target="_blank">Instagram</a></li>
+                <li id="liCo">Juan Pablo<br>Pérez Búc</li>
+                <li id="liCo">201807201</li>
+            </ul>
+        </div>
+        <div id="mis" >
+            <span id="span1"><p>Misión</p></span> <br>
+            <span id="span2"><p>
+                Lorem ipsum dolor sit amet consectetur<br> 
+                adipisicing elit. Praesentium sed quibusdam <br>
+                consequatur facere sequi vel atque placeat <br>
+                quisquam harum aliquam esse blanditiis <br>
+                dolores eos odio, possimus soluta sint <br> 
+                voluptatem. Ad.</p>
+            </span>
+        </div>
+        <div id="vis" >
+            <span id="span1"><p>Visión</p></span> <br>
+            <span id="span2"><p>
+                Lorem ipsum dolor sit amet consectetur<br> 
+                adipisicing elit. Praesentium sed quibusdam <br>
+                consequatur facere sequi vel atque placeat <br>
+                quisquam harum aliquam esse blanditiis <br>
+                dolores eos odio, possimus soluta sint <br> 
+                voluptatem. Ad.</p>
+            </span>
+        </div>
+        <div id="acerca" >
+            <span id="span1"><p>Acerca de:</p></span> <br>
+            <span id="span2"><p>
+                Lorem ipsum dolor sit amet consectetur<br> 
+                adipisicing elit. Praesentium sed quibusdam <br>
+                consequatur facere sequi vel atque placeat <br>
+            </span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Administración</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/marathon.png' %}">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "css/admin.css" %}'>
+    <script type="text/javascript" src='{% static "js/cambiarPestanna.js" %}'></script>
+    <script type="text/javascript" src='{% static "js/jquery-1.7.2.min.js" %}'></script>
+    <script type="text/javascript" src='{% static "js/admin.js" %}'></script>
+</head>
+<body>
+<header id="encabezado">
+    <a href="admin.html">
+        <div id="head-desc">
+            <span id="nam-site">Hospital Universitario</span>
+            <span id="des-site">Existiendo por la salud de todos</span>
+        </div>
+    </a>
+    <a id="link-register" href="tablas_administrador.html">Listas</a>
+</header>
+<!---->
+<div class="contenedor">
+    <div class="titulo">CARGA MASIVA DE DATOS</div>
+    <div id="pestanas">
+        <ul id=lista>
+            <li id="pestana1"><a href='javascript:cambiarPestanna(pestanas,pestana1);'>Cargar Doctores</a></li>
+            <li id="pestana2"><a href='javascript:cambiarPestanna(pestanas,pestana2);'>Cargar Enfermeras</a></li>
+            <li id="pestana3"><a href='javascript:cambiarPestanna(pestanas,pestana3);'>Cargar Pacientes</a></li>
+            <li id="pestana4"><a href='javascript:cambiarPestanna(pestanas,pestana4);'>Cargar Medicinas</a></li>
+        </ul>
+    </div>
+
+    <body onload="javascript:cambiarPestanna(pestanas,pestana1);">
+
+    <div id="contenidopestanas">
+        <div id="cpestana1">
+            <form id="archivos1" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <legend id="legendDoct">Carga de Doctores</legend>
+                <input type="file" name="inputDoc" id="inputDoc" accept=".csv">
+            </form>
+            <section id="cajadatos" style="float:left; width: 500px;margin-left: 20px;
+                    padding:20px; border: 1px solid #999999;">
+                <p>seleccione un archivo</p>
+            </section>
+        </div>
+        <div id="cpestana2">
+            <form id="archivos2" action="" method="POST" enctype="multipart/form-data">
+                <legend id="legendEnfe">Carga de Enfermeras</legend>
+                <input type="file" name="inputEnf" id="inputEnf" onchange="handleFiles(this.files)" accept=".csv">
+            </form>
+        </div>
+        <div id="cpestana3">
+            <form id="archivos3" action="" method="POST" enctype="multipart/form-data">
+                <legend id="legendPaci">Carga de Pacientes</legend>
+                <input type="file" name="inputPac" id="inputPac" onchange="handleFiles(this.files)" accept=".csv">
+            </form>
+        </div>
+        <div id="cpestana4">
+            <form id="archivos4" action="" method="POST" enctype="multipart/form-data">
+                <legend id="legendMedi">Carga de Medicinas</legend>
+                <input type="file" name="inputMed" id="inputMed" onchange="handleFiles(this.files)" accept=".csv">
+            </form>
+        </div>
+    </div>
+    </body>
+</html>

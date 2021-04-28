@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tablas de Administración</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/marathon.png' %}">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "css/admin_tab.css" %}'>
+    <script type="text/javascript" src="{% static 'js/cambiarPestanna.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-1.7.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/html2pdf.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/tabadmin.js' %}"></script>
+</head>
+<body onload="javascript:cambiarPestanna(pestanas,pestana1);">
+<header id="encabezado">
+    <a href="admin.html">
+        <div id="head-desc">
+            <span id="nam-site">Hospital Universitario</span>
+            <span id="des-site">Existiendo por la salud de todos</span>
+        </div>
+    </a>
+    <a id="link-tabs" href="admin.html">Home</a>
+</header>
+<!---->
+<div class="contenedor">
+    <div class="titulo">LISTAS
+    </div>
+    <div id="pestanas">
+        <ul id=lista>
+            <li id="pestana1"><a href='javascript:cambiarPestanna(pestanas,pestana1);'>Doctores</a></li>
+            <li id="pestana2"><a href='javascript:cambiarPestanna(pestanas,pestana2);'>Enfermería</a></li>
+            <li id="pestana3"><a href='javascript:cambiarPestanna(pestanas,pestana3);'>Pacientes</a></li>
+            <li id="pestana4"><a href='javascript:cambiarPestanna(pestanas,pestana4);'>Medicinas</a></li>
+        </ul>
+    </div>
+
+
+    <div id="contenidopestanas">
+        <div id="cpestana1">
+            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" onclick="imprimir('tabdoc','reporte doctores.pdf')">
+            <table id="tabdoc">
+                <thead>
+                    <tr>
+                        <th id="titulo">Nombre</th><th id="titulo">Apellido</th>
+                        <th id="titulo">Usuername</th><th id="titulo">Especialidad</th>
+                        <th id="titulo">Ver</th><th id="titulo">Modificar</th>
+                        <th id="titulo">Eliminar</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doc in doctores %}
+                    <tr>
+                        <td>{{ doc.nombre }}</td><td>{{ doc.apellido }}</td><td>{{ doc.usuario }}</td>
+                        <td>{{ doc.especialidad }}</td>
+                        <td id="btn"><input type="button" class="ver" id={{ doc.usuario }} value="Ver"></td>
+                        <td id="btn"><input type="button" class="modificar" id={{ doc.usuario }} value="Modificar"></td>
+                        <td id="btn"><input type="button" class="eliminar" id={{ doc.usuario}} value="Eliminar"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="cpestana2">
+            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" 
+            onclick="imprimir('tabenf','reporte enfermeria.pdf')">
+            <table id="tabenf">
+                <thead>
+                    <tr>
+                        <th id="titulo">Nombre</th><th id="titulo">Apellido</th>
+                        <th id="titulo">Usuername</th><th id="titulo">Ver</th>
+                        <th id="titulo">Modificar</th><th id="titulo">Eliminar</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for enf in enfermeras %}
+                    <tr>
+                        <td>{{ enf.nombre }}</td><td>{{ enf.apellido }}</td><td>{{ enf.usuario }}</td>
+                        <td id="btn"><input type="button" class="ver" id={{ enf.usuario }} value="Ver"></td>
+                        <td id="btn"><input type="button" class="modificar" id={{ enf.usuario }} value="Modificar"></td>
+                        <td id="btn"><input type="button" class="eliminar" id={{ enf.usuario}} value="Eliminar"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="cpestana3">
+            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" 
+            onclick="imprimir('tabpac','reporte pacientes.pdf')">
+            <table id="tabpac">
+                <thead>
+                    <tr>
+                        <th id="titulo">Nombre</th><th id="titulo">Apellido</th>
+                        <th id="titulo">Usuername</th><th id="titulo">Ver</th>
+                        <th id="titulo">Modificar</th><th id="titulo">Eliminar</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pac in pacientes %}
+                    <tr>
+                        <td>{{ pac.nombre }}</td><td>{{ pac.apellido }}</td><td>{{ pac.usuario }}</td>
+                        <td id="btn"><input type="button" class="ver" id={{ pac.usuario }} value="Ver"></td>
+                        <td id="btn"><input type="button" class="modificar" id={{ pac.usuario }} value="Modificar"></td>
+                        <td id="btn"><input type="button" class="eliminar" id={{ pac.usuario}} value="Eliminar"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="cpestana4">
+            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" onclick="imprimir('tabmed','reporte medicinas.pdf')">
+            <table id="tabmed">
+                <thead>
+                    <tr>
+                        <th id="titulo">Medicina</th><th id="titulo">Precio</th>
+                        <th id="titulo">Cantidad</th><th id="titulo">Ver</th>
+                        <th id="titulo">Modificar</th><th id="titulo">Eliminar</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for med in medicinas %}
+                    <tr>
+                        <td>{{ med.nombre }}</td><td>{{ med.precio }}</td><td>{{ med.cantidad }}</td>
+                        <td id="btn"><input type="button" class="ver" id={{ med.nombre }} value="Ver"></td>
+                        <td id="btn"><input type="button" class="modificar" id={{ med.nombre }} value="Modificar"></td>
+                        <td id="btn"><input type="button" class="eliminar" id={{ med.nombre}} value="Eliminar"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+body{
+    background: -moz-linear-gradient(left,#011f4b,#005b96);
+    background: linear-gradient(left, #011f4b, #005b96);
+    background: -webkit-linear-gradient(left, #011f4b, #005b96);
+    margin: 0;
+    padding: 0;
+    padding-top: 95px;
+    padding-bottom: 10%;
+}
+#encabezado{
+    background-color: rgb(105, 105, 105);
+    position: fixed;
+    width: 100%;
+    height: 95px;
+    color: white;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    z-index: 10;
+}
+#encabezado a{
+    color: white;
+    text-decoration: none;
+}
+#head-desc{
+    float: left;
+    margin-left: 30px;
+}
+#nam-site{
+    display: block;
+    font-weight: 900;
+    font-size: xx-large;
+    padding: 7px;
+}
+#des-site{
+    display: block;
+    font-weight: 300;
+    font-size: larger;
+    padding: 6px;
+}
+#link-register{
+    float: right;
+    font-size: larger;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-right: 30px;
+}
+#pie{
+    
+    background-color: #333;
+    position: relative;
+    margin-bottom: -300px;
+    width: 100%;
+    height: 300px;
+    clear: both;
+}
+#contacto{
+    display: block;
+    position: absolute;
+    background-color: #6497b1;
+    width: 160px;
+    height: 300px;
+    margin-left: 30px;
+
+}
+#liCo{
+    display: block;
+    padding-top: 25px;
+    color: aliceblue;
+}
+
+#aMail{
+    color: rgb(250, 209, 209);
+}
+#mis{
+    position: absolute;
+    margin-left: 205px;
+    background-color: #6497b1;
+    text-align: center;
+    height: 300px;
+    width: 400px;
+}
+#span1{
+    font-weight: bold;
+    color: aliceblue;
+    font-size: 20px;
+    text-align: center;
+}
+#span2{
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(250, 209, 209);
+}
+#vis{
+    position: absolute;
+    margin-left: 620px;
+    background-color: #6497b1;
+    text-align: center;
+    height: 300px;
+    width: 400px;
+}
+#span1{
+    font-weight: bold;
+    color: aliceblue;
+    font-size: 20px;
+    text-align: center;
+}
+#span2{
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(250, 209, 209);
+}
+#acerca{
+    position: absolute;
+    margin-left: 1035px;
+    background-color: #6497b1;
+    text-align: center;
+    height: 300px;
+    width: 300px;
+}
+#acerca #span1{
+    color: aliceblue;
+}
+#acerca #span2{
+    text-align: center;
+}
+figure{
+    display: block;
+}
+img{
+    display: block;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    width: 67.2%;
+    height: 67.2%;
+    position: static;
+    float: left;
+}
+#formulario{
+    float: right;
+    border-style: double solid;
+    border-color: #6497b1;
+    border-radius: 0.7em;
+    border-width: 7px;
+    width: 350px;
+    height: auto;
+    margin-right: 25px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    background-color: #b3cde0;
+}
+
+#nombre,#apellido,#nacimiento,#sexo,#telefono,#usuario, #contrasena{
+    width: 250px;
+    height: 30px;
+    font-size: 23px;
+    margin: 20px 50px;
+    text-align: center;
+    color: darkslategrey;
+    background-color: transparent;
+    border-radius: 1em;
+    border-style: solid double;
+    border-color: #005b96;
+    border-width: 5px;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+}
+legend{
+    text-align: center;
+    color: darkslategrey;
+
+}
+#enviar{
+    margin: 16px 75px;
+    width: 200px;
+    height: 50px;
+    border-radius: 2em;
+    border-width: 3px;
+    color: aliceblue;
+    background-color: rgba(7, 163, 163, 0.39);
+    font-size: 25px;
+    text-align: center;
+    border-style: groove solid;
+    cursor: pointer;
+}
