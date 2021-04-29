@@ -158,6 +158,28 @@ def comprobar_medicina(nam):
     return continuar
 
 def admin_tabs(request):
-
-    return render(request, "tablas_administrador.html",
-    {'doctores': doctors,'enfermeras': nurses,'pacientes': patients,'medicinas':medicines})
+    if request.method == "POST":
+        datos = json.loads(request.body)
+        if datos["accion"] == "del":
+            eliminar(datos["tipo"],datos["elemento"])
+            HttpResponse("eliminado")
+    else:
+        return render(request, "tablas_administrador.html",
+        {'doctores': doctors,'enfermeras': nurses,'pacientes': patients,'medicinas':medicines})
+def eliminar(tipo,elemento):
+    if tipo == "doc":
+        for i in range (len(doctors)):
+            if doctors[i].usuario == elemento:
+                del doctors[i]  
+    if tipo == "enf":
+        for i in range (len(nurses)):
+            if nurses[i].usuario == elemento:
+                del nurses[i] 
+    if tipo == "pac":
+        for i in range (len(patients)):
+            if patients[i].usuario == elemento:
+                del patients[i] 
+    if tipo == "med":
+        for i in range (len(medicines)):
+            if medicines[i].nombre == elemento:
+                del medicines[i] 

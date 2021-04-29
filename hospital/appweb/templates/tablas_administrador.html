@@ -55,9 +55,10 @@
                     <tr>
                         <td>{{ doc.nombre }}</td><td>{{ doc.apellido }}</td><td>{{ doc.usuario }}</td>
                         <td>{{ doc.especialidad }}</td>
-                        <td id="btn"><input type="button" class="ver" id={{ doc.usuario }} value="Ver"></td>
-                        <td id="btn"><input type="button" class="modificar" id={{ doc.usuario }} value="Modificar"></td>
-                        <td id="btn"><input type="button" class="eliminar" id={{ doc.usuario}} value="Eliminar"></td>
+                        <td id="btn"><input type="button" class="ver" id="{{ doc.usuario }}+ver" value="Ver"></td>
+                        <td id="btn"><input type="button" class="modificar" id="{{ doc.usuario }}+mod" value="Modificar"></td>
+                        <td id="btn"><input type="button" class="eliminar" id="{{ doc.usuario}}+del" 
+                            value="Eliminar" onclick="eliminarD('{{ doc.usuario }}+del')"></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -79,9 +80,10 @@
                     {% for enf in enfermeras %}
                     <tr>
                         <td>{{ enf.nombre }}</td><td>{{ enf.apellido }}</td><td>{{ enf.usuario }}</td>
-                        <td id="btn"><input type="button" class="ver" id={{ enf.usuario }} value="Ver"></td>
-                        <td id="btn"><input type="button" class="modificar" id={{ enf.usuario }} value="Modificar"></td>
-                        <td id="btn"><input type="button" class="eliminar" id={{ enf.usuario}} value="Eliminar"></td>
+                        <td id="btn"><input type="button" class="ver" id='{{ enf.usuario }}+ver' value="Ver"></td>
+                        <td id="btn"><input type="button" class="modificar" id='{{ enf.usuario }}+mod' value="Modificar"></td>
+                        <td id="btn"><input type="button" class="eliminar" id='{{ enf.usuario}}+del' 
+                            value="Eliminar" onclick="eliminarE('{{ enf.usuario }}+del')"></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -103,16 +105,18 @@
                     {% for pac in pacientes %}
                     <tr>
                         <td>{{ pac.nombre }}</td><td>{{ pac.apellido }}</td><td>{{ pac.usuario }}</td>
-                        <td id="btn"><input type="button" class="ver" id={{ pac.usuario }} value="Ver"></td>
-                        <td id="btn"><input type="button" class="modificar" id={{ pac.usuario }} value="Modificar"></td>
-                        <td id="btn"><input type="button" class="eliminar" id={{ pac.usuario}} value="Eliminar"></td>
+                        <td id="btn"><input type="button" class="ver" id='{{ pac.usuario }}+ver' value="Ver"></td>
+                        <td id="btn"><input type="button" class="modificar" id='{{ pac.usuario }}+mod' value="Modificar"></td>
+                        <td id="btn"><input type="button" class="eliminar" id='{{ pac.usuario}}+del' 
+                            value="Eliminar" onclick="eliminarP('{{ pac.usuario }}+del')"></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
         <div id="cpestana4">
-            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" onclick="imprimir('tabmed','reporte medicinas.pdf')">
+            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" 
+            onclick="imprimir('tabmed','reporte medicinas.pdf')">
             <table id="tabmed">
                 <thead>
                     <tr>
@@ -127,9 +131,10 @@
                     <tr>
                         <td>{{ med.nombre }}</td><td>{{ med.precio }}</td>
                         <td>{{ med.descripcion }}</td><td>{{ med.cantidad }}</td>
-                        <td id="btn"><input type="button" class="ver" id={{ med.nombre }} value="Ver"></td>
-                        <td id="btn"><input type="button" class="modificar" id={{ med.nombre }} value="Modificar"></td>
-                        <td id="btn"><input type="button" class="eliminar" id={{ med.nombre}} value="Eliminar"></td>
+                        <td id="btn"><input type="button" class="ver" id='{{ med.nombre }}+ver' value="Ver"></td>
+                        <td id="btn"><input type="button" class="modificar" id='{{ med.nombre }}+mod' value="Modificar"></td>
+                        <td id="btn"><input type="button" class="eliminar" id='{{ med.nombre }}+del' 
+                            value="Eliminar" onclick="eliminarM('{{ med.nombre }}+del')"></td>
                     </tr>
                 {% endfor %}
                 </tbody>
