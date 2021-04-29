@@ -14,13 +14,13 @@
 </head>
 <body>
 <header id="encabezado">
-    <a href="admin.html">
+    <a href="{% url 'administrador' %}">
         <div id="head-desc">
             <span id="nam-site">Hospital Universitario</span>
             <span id="des-site">Existiendo por la salud de todos</span>
         </div>
     </a>
-    <a id="link-register" href="tablas_administrador.html">Listas</a>
+    <a id="link-register" href="{% url 'admintabs' %}">Listas</a>
 </header>
 <!---->
 <div class="contenedor">
@@ -38,31 +38,27 @@
 
     <div id="contenidopestanas">
         <div id="cpestana1">
-            <form id="archivos1" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <form id="archivos1" method="POST" enctype="multipart/form-data">{% csrf_token %}
                 <legend id="legendDoct">Carga de Doctores</legend>
                 <input type="file" name="inputDoc" id="inputDoc" accept=".csv">
             </form>
-            <section id="cajadatos" style="float:left; width: 500px;margin-left: 20px;
-                    padding:20px; border: 1px solid #999999;">
-                <p>seleccione un archivo</p>
-            </section>
         </div>
         <div id="cpestana2">
-            <form id="archivos2" action="" method="POST" enctype="multipart/form-data">
+            <form id="archivos2" method="POST" enctype="multipart/form-data">{% csrf_token %}
                 <legend id="legendEnfe">Carga de Enfermeras</legend>
-                <input type="file" name="inputEnf" id="inputEnf" onchange="handleFiles(this.files)" accept=".csv">
+                <input type="file" name="inputEnf" id="inputEnf" accept=".csv">
             </form>
         </div>
         <div id="cpestana3">
-            <form id="archivos3" action="" method="POST" enctype="multipart/form-data">
+            <form id="archivos3" method="POST" enctype="multipart/form-data">{% csrf_token %}
                 <legend id="legendPaci">Carga de Pacientes</legend>
-                <input type="file" name="inputPac" id="inputPac" onchange="handleFiles(this.files)" accept=".csv">
+                <input type="file" name="inputPac" id="inputPac" accept=".csv">
             </form>
         </div>
         <div id="cpestana4">
-            <form id="archivos4" action="" method="POST" enctype="multipart/form-data">
+            <form id="archivos4" method="POST" enctype="multipart/form-data">{% csrf_token %}
                 <legend id="legendMedi">Carga de Medicinas</legend>
-                <input type="file" name="inputMed" id="inputMed" onchange="handleFiles(this.files)" accept=".csv">
+                <input type="file" name="inputMed" id="inputMed" accept=".csv">
             </form>
         </div>
     </div>

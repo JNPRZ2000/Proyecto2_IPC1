@@ -15,13 +15,13 @@
 </head>
 <body onload="javascript:cambiarPestanna(pestanas,pestana1);">
 <header id="encabezado">
-    <a href="admin.html">
+    <a href="{% url 'administrador' %}">
         <div id="head-desc">
             <span id="nam-site">Hospital Universitario</span>
             <span id="des-site">Existiendo por la salud de todos</span>
         </div>
     </a>
-    <a id="link-tabs" href="admin.html">Home</a>
+    <a id="link-tabs" href="{% url 'administrador' %}">Home</a>
 </header>
 <!---->
 <div class="contenedor">
@@ -117,15 +117,16 @@
                 <thead>
                     <tr>
                         <th id="titulo">Medicina</th><th id="titulo">Precio</th>
-                        <th id="titulo">Cantidad</th><th id="titulo">Ver</th>
-                        <th id="titulo">Modificar</th><th id="titulo">Eliminar</th>
-    
+                        <th id="titulo">Descripción</th><th id="titulo">Cantidad</th>
+                        <th id="titulo">Ver</th><th id="titulo">Modificar</th>
+                        <th id="titulo">Eliminar</th>    
                     </tr>
                 </thead>
                 <tbody>
                     {% for med in medicinas %}
                     <tr>
-                        <td>{{ med.nombre }}</td><td>{{ med.precio }}</td><td>{{ med.cantidad }}</td>
+                        <td>{{ med.nombre }}</td><td>{{ med.precio }}</td>
+                        <td>{{ med.descripcion }}</td><td>{{ med.cantidad }}</td>
                         <td id="btn"><input type="button" class="ver" id={{ med.nombre }} value="Ver"></td>
                         <td id="btn"><input type="button" class="modificar" id={{ med.nombre }} value="Modificar"></td>
                         <td id="btn"><input type="button" class="eliminar" id={{ med.nombre}} value="Eliminar"></td>

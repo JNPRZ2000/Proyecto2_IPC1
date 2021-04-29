@@ -19,10 +19,10 @@ pac2 = Patient("Ivan","Rodriguez","26/12/1996","M","ivanrodriguez","123456789","
 pac3 = Patient("Hugo","García","19/02/1999","M","hugogarcia","123456789","12345678")
 pac4 = Patient("Jhonson","Avery","30/06/1998","F","jhonsonavery","123456789","12345678")
 
-med1 = Medicine("medicina1",170,"primera descripcion",50)
-med2 = Medicine("medicina2",200,"segunda descripcion",90)
-med3 = Medicine("medicina3",90,"tercera descripcion",70)
-med4 = Medicine("medicina4",180,"cuarta descripcion",85)
+med1 = Medicine("medicina1","170","primera descripcion","50")
+med2 = Medicine("medicina2","200","segunda descripcion","90")
+med3 = Medicine("medicina3","90","tercera descripcion","70")
+med4 = Medicine("medicina4","180","cuarta descripcion","85")
 
 admin = AdminWeb()
 doctors = [doc1,doc2,doc3,doc4]
@@ -76,16 +76,88 @@ def registro(request):
             for i in range(len(patients)):
                 print(i)
                 print(patients[i].usuario)
-            return render(request, "login.html")
-        
-
-
+            return render(request, "registro.html")
     else:
         return render(request, "registro.html")
 
 def administracion(request):
-    return render(request,"admin.html")
+    if request.method == "POST":
+        datos = json.loads(request.body)
+        cont = 0
+        elementos = datos["usuarios"]
+        if datos["tipo"] == "doc":
+            cont = ingresar_doc(elementos)
+        elif datos["tipo"] == "enf":
+            cont = ingresar_enf(elementos)
+        elif datos["tipo"] == "pac":
+            cont = ingresar_pac(elementos)
+        elif datos["tipo"] == "med":
+            cont = ingresar_med(elementos)
+        return HttpResponse(cont)
+    else:
+        return render(request,"admin.html")
+def ingresar_doc(elementos):
+    contador = 0
+    for i in range(len(elementos)):
+        if comprobar_usuario(elementos[i][4]) == True:
+            doctors.append(Doctor(elementos[i][0],elementos[i][1],elementos[i][2],elementos[i][3],
+            elementos[i][4],elementos[i][5],elementos[i][6],elementos[i][7]))
+            contador += 1
+    return contador
+def ingresar_enf(elementos):
+    contador = 0
+    for i in range(len(elementos)):
+        if comprobar_usuario(elementos[i][4]) == True:
+            nurses.append(Nurse(elementos[i][0],elementos[i][1],elementos[i][2],
+            elementos[i][3],elementos[i][4],elementos[i][5],elementos[i][6]))
+            contador += 1
+    return contador
+def ingresar_pac(elementos):
+    contador = 0
+    for i in range(len(elementos)):
+        if comprobar_usuario(elementos[i][4]) == True:
+            patients.append(Patient(elementos[i][0],elementos[i][1],elementos[i][2],elementos[i][3],
+            elementos[i][4],elementos[i][5],elementos[i][6]))
+            contador += 1
+    return contador
+def ingresar_med(elementos):
+    print(elementos)
+    contador = 0
+    for i in range(len(elementos)):
+        if comprobar_medicina(elementos[i][0]) == True:
+            medicines.append(Medicine(elementos[i][0],elementos[i][1],elementos[i][2],elementos[i][3]))
+        contador += 1
+    return contador
+def comprobar_usuario(usr):
+    contd = 0
+    conte = 0
+    contp = 0
+    continuar = True
+    while contd < len(doctors) and continuar != False:
+        if doctors[contd].usuario == usr:
+            continuar = False
+            break
+        contd += 1
+    while conte < len(nurses) and continuar != False:
+        if nurses[conte].usuario == usr:
+            continuar = False
+            break
+        conte += 1
+    while contp < len(patients) and continuar != False:
+        if patients[contp].usuario == usr:
+            continuar = False
+            break
+        contp += 1
+    return continuar
+def comprobar_medicina(nam):
+    continuar = True
+    for i in range(len(medicines)):
+        if medicines[i].nombre == nam:
+            continuar = False
+            break
+    return continuar
 
 def admin_tabs(request):
+
     return render(request, "tablas_administrador.html",
     {'doctores': doctors,'enfermeras': nurses,'pacientes': patients,'medicinas':medicines})
