@@ -1,23 +1,23 @@
 from django.shortcuts import render,HttpResponse
-from appweb.clases.objetos import AdminWeb, Doctor, Nurse, Patient, Medicine
+from appweb.clases.objetos import AdminWeb, Doctor, Nurse, Patient, Medicine, Receta
 import json
 
 # Create your views here.
 # Create an admin and list for different type of users
-doc1 = Doctor("Juan","Pérez","06/01/2000","M","jn612perez","123456789","Cirujano","49557946")
-doc2 = Doctor("Carola","Aguilón","15/05/1999","F","cati15","123456789","Cardiologo","12345678")
-doc3 = Doctor("Alicia","Shar","04/11/2001","F","amshar","123456789","Dentista","12345678")
-doc4 = Doctor("Pablo","Búc","01/06/2000","M","pablobuc","123456789","Anestesista","12345678")
+doc1 = Doctor("Juan","Pérez","06/01/2000","M","jn612perez","123456789","Cirujano","49557946",0)
+doc2 = Doctor("Carola","Aguilón","15/05/1999","F","cati15","123456789","Cardiologo","12345678",1)
+doc3 = Doctor("Alicia","Shar","04/11/2001","F","amshar","123456789","Dentista","12345678",2)
+doc4 = Doctor("Pablo","Búc","01/06/2000","M","pablobuc","123456789","Anestesista","12345678",3)
 
-enf1 = Nurse("Milagros","Begazo","07/07/2000","F","milagrosbegazo","123456789","12345678")
-enf2 = Nurse("Mariela","Torres","13/02/2000","F","marielatorres","123456789","12345678")
-enf3 = Nurse("Stephania","lopez","12/05/2000","F","tefylopez","123456789","12345678")
-enf4 = Nurse("Marlene","Arriaga","26/08/2001","F","marlenearriaga","123456789","12345678")
+enf1 = Nurse("Milagros","Begazo","07/07/2000","F","milagrosbegazo","123456789","12345678",0)
+enf2 = Nurse("Mariela","Torres","13/02/2000","F","marielatorres","123456789","12345678",1)
+enf3 = Nurse("Stephania","lopez","12/05/2000","F","tefylopez","123456789","12345678",2)
+enf4 = Nurse("Marlene","Arriaga","26/08/2001","F","marlenearriaga","123456789","12345678",3)
 
-pac1 = Patient("Fernanda","Monzón","30/06/1998","F","fernandamonzon","123456789","12345678")
-pac2 = Patient("Ivan","Rodriguez","26/12/1996","M","ivanrodriguez","123456789","12345678")
-pac3 = Patient("Hugo","García","19/02/1999","M","hugogarcia","123456789","12345678")
-pac4 = Patient("Jhonson","Avery","30/06/1998","F","jhonsonavery","123456789","12345678")
+pac1 = Patient("Fernanda","Monzón","30/06/1998","F","fernandamonzon","123456789","12345678",0)
+pac2 = Patient("Ivan","Rodriguez","26/12/1996","M","ivanrodriguez","123456789","12345678",1)
+pac3 = Patient("Hugo","García","19/02/1999","M","hugogarcia","123456789","12345678",2)
+pac4 = Patient("Jhonson","Avery","30/06/1998","M","jhonsonavery","123456789","12345678",3)
 
 med1 = Medicine("medicina1","170","primera descripcion","50")
 med2 = Medicine("medicina2","200","segunda descripcion","90")
@@ -29,10 +29,44 @@ doctors = [doc1,doc2,doc3,doc4]
 nurses = [enf1,enf2,enf3,enf4]
 patients = [pac1,pac2,pac3,pac4]
 medicines = [med1,med2,med3,med4]
+recetas = []
 
 
 def login(request):
-    return render(request, "login.html")
+    if request.method == "POST":
+        datos = json.loads(request.body)
+        li = searchup(datos["usuario"],datos["contrasena"])
+        return HttpResponse(str(li[0]+"-"+str(li[1])))
+    else:
+        return render(request, "login.html")
+
+def searchup(usuario,contrasena):
+    tipo = "noexiste"
+    continuar = True
+    cDo = 0
+    cEn = 0
+    cPa = 0
+    indice = -1
+    while continuar == True and cDo < len(doctors):
+        if usuario == doctors[cDo].usuario and contrasena == doctors[cDo].contrasena:
+            indice = cDo
+            tipo = "doc"
+            continuar = False
+        cDo += 1
+    while continuar == True and cEn < len(doctors):
+        if usuario == doctors[cEn].usuario and contrasena == doctors[cEn].contrasena:
+            indice = cEn
+            tipo = "enf"
+            continuar = False
+        cEn += 1
+    while continuar == True and cPa < len(doctors):
+        if usuario == doctors[cPa].usuario and contrasena == doctors[cPa].contrasena:
+            indice = cPa
+            tipo = "pac"
+            continuar = False
+        cPa += 1    
+    return [tipo,indice]
+
 
 def registro(request):
     if request.method == "POST":
@@ -95,13 +129,13 @@ def administracion(request):
             cont = ingresar_med(elementos)
         return HttpResponse(cont)
     else:
-        return render(request,"admin.html")
+        return render(request,"admin.html",{"admin":admin})
 def ingresar_doc(elementos):
     contador = 0
     for i in range(len(elementos)):
         if comprobar_usuario(elementos[i][4]) == True:
             doctors.append(Doctor(elementos[i][0],elementos[i][1],elementos[i][2],elementos[i][3],
-            elementos[i][4],elementos[i][5],elementos[i][6],elementos[i][7]))
+            elementos[i][4],elementos[i][5],elementos[i][6],elementos[i][7],len(doctors)))
             contador += 1
     return contador
 def ingresar_enf(elementos):
@@ -109,7 +143,7 @@ def ingresar_enf(elementos):
     for i in range(len(elementos)):
         if comprobar_usuario(elementos[i][4]) == True:
             nurses.append(Nurse(elementos[i][0],elementos[i][1],elementos[i][2],
-            elementos[i][3],elementos[i][4],elementos[i][5],elementos[i][6]))
+            elementos[i][3],elementos[i][4],elementos[i][5],elementos[i][6],len(nurses)))
             contador += 1
     return contador
 def ingresar_pac(elementos):
@@ -117,11 +151,11 @@ def ingresar_pac(elementos):
     for i in range(len(elementos)):
         if comprobar_usuario(elementos[i][4]) == True:
             patients.append(Patient(elementos[i][0],elementos[i][1],elementos[i][2],elementos[i][3],
-            elementos[i][4],elementos[i][5],elementos[i][6]))
+            elementos[i][4],elementos[i][5],elementos[i][6],len(patients)))
             contador += 1
     return contador
 def ingresar_med(elementos):
-    print(elementos)
+    print(elementos)  
     contador = 0
     for i in range(len(elementos)):
         if comprobar_medicina(elementos[i][0]) == True:
@@ -160,9 +194,8 @@ def comprobar_medicina(nam):
 def admin_tabs(request):
     if request.method == "POST":
         datos = json.loads(request.body)
-        if datos["accion"] == "del":
-            eliminar(datos["tipo"],datos["elemento"])
-            HttpResponse("eliminado")
+        eliminar(datos["tipo"],datos["elemento"])
+        return HttpResponse("eliminado")
     else:
         return render(request, "tablas_administrador.html",
         {'doctores': doctors,'enfermeras': nurses,'pacientes': patients,'medicinas':medicines})
@@ -171,15 +204,161 @@ def eliminar(tipo,elemento):
         for i in range (len(doctors)):
             if doctors[i].usuario == elemento:
                 del doctors[i]  
+                break
     if tipo == "enf":
         for i in range (len(nurses)):
             if nurses[i].usuario == elemento:
                 del nurses[i] 
+                break
     if tipo == "pac":
         for i in range (len(patients)):
             if patients[i].usuario == elemento:
                 del patients[i] 
+                break
     if tipo == "med":
         for i in range (len(medicines)):
             if medicines[i].nombre == elemento:
-                del medicines[i] 
+                del medicines[i]
+                break
+def modify_doc(request):
+    if request.method == "POST":
+        dat = json.loads(request.body)
+        if len(dat.items()) == 1:
+            for i in range(len(doctors)):
+                if doctors[i].usuario == dat["doctor"]:
+                    print(doctors[i].to_string())
+                    return HttpResponse(doctors[i].to_string())
+
+        if len(dat.items()) == 9:
+            pos = int(dat["indice"])
+            doctors[pos].nombre=dat["nombre"]
+            doctors[pos].apellido=dat["apellido"]
+            doctors[pos].fecha=dat["fecha"]
+            doctors[pos].sexo=dat["sexo"]
+            doctors[pos].telefono=dat["telefono"]
+            doctors[pos].especialidad=dat["especialidad"]
+            doctors[pos].usuario=dat["usuario"]
+            doctors[pos].contrasena=dat["contrasena"]
+            return HttpResponse("a")
+    else:
+        return render(request, "modificardoc.html")
+def modify_ep(request):
+    if request.method == "POST":
+        datos = json.loads(request.body)
+        print(datos)
+        if len(datos.items()) == 2:
+            if datos["tipo"] == "enf":
+                for i in range(len(nurses)):
+                    if nurses[i].usuario == datos["usuario"]:
+                        return HttpResponse(nurses[i].to_string())
+            if datos["tipo"] == "pac":
+                for i in range(len(patients)):
+                    if patients[i].usuario == datos["usuario"]:
+                        return HttpResponse(patients[i].to_string())
+        if len(datos.items()) == 9:
+            if datos["tipo"] == "enf":
+                print(datos)
+                pos = int(datos["indice"])
+                nurses[pos].nombre=datos["nombre"]
+                nurses[pos].apellido=datos["apellido"]
+                nurses[pos].fecha=datos["fecha"]
+                nurses[pos].sexo=datos["sexo"]
+                nurses[pos].telefono=datos["telefono"]
+                nurses[pos].usuario=datos["usuario"]
+                nurses[pos].contrasena=datos["contrasena"]
+                return HttpResponse("a")
+            if datos["tipo"] == "pac":
+                print(datos)
+                pos = int(datos["indice"])
+                patients[pos].nombre=datos["nombre"]
+                patients[pos].apellido=datos["apellido"]
+                patients[pos].fecha=datos["fecha"]
+                patients[pos].sexo=datos["sexo"]
+                patients[pos].telefono=datos["telefono"]
+                patients[pos].usuario=datos["usuario"]
+                patients[pos].contrasena=datos["contrasena"]
+                return HttpResponse("a")
+    else:
+        return render(request, "modificar.html")
+def modify_med(request):
+    if request.method == "POST":
+        datos = json.loads(request.body)
+        if len(datos.items()) == 1:
+            for i in range(len(medicines)):
+                if datos["nombre"] == medicines[i].nombre:
+                    return HttpResponse([medicines[i].nombre+","+medicines[i].precio+","+medicines[i].descripcion
+                    +","+medicines[i].cantidad+","+ str(i)])
+        if len(datos.items()) == 2:
+            exis = False
+            for i in range(len(medicines)):
+                if datos["nombre"] == medicines[i].nombre:
+                    exis = True
+                    break
+            if exis == True:
+                return HttpResponse("existe")
+            else:
+                return HttpResponse("existent")
+        if len(datos.items()) == 5:
+            pos = int(datos["indice"])
+            medicines[pos].nombre = datos["nombre"]
+            medicines[pos].precio = datos["precio"]
+            medicines[pos].descripcion = datos["descripcion"]
+            medicines[pos].cantidad = datos["cantidad"]
+            return HttpResponse("")
+    else:    
+        return render(request,"modificarmed.html")
+
+def verdoc(request):
+    if request.method == "POST":
+        dato = json.loads(request.body)
+        if len(dato.items()) == 1:
+            usuario = dato["doctor"]
+            for i in range(len(doctors)):
+                if usuario == doctors[i].usuario:
+                    return HttpResponse([doctors[i].nombre+","+doctors[i].apellido+","+doctors[i].fecha+","+
+                    doctors[i].sexo+","+doctors[i].telefono+","+doctors[i].especialidad+","+doctors[i].usuario+","+
+                    doctors[i].contrasena])
+    else:
+        return render(request, "verdoc.html")
+def verep(request):
+    if request.method == "POST":
+        dato = json.loads(request.body)
+        if dato["tipo"] == "enf":
+            for i in range(len(nurses)):
+                if dato["usuario"] == nurses[i].usuario:
+                    return HttpResponse([nurses[i].nombre+","+nurses[i].apellido+","+nurses[i].fecha+","+
+                    nurses[i].sexo+","+nurses[i].telefono+","+nurses[i].usuario+","+nurses[i].contrasena])
+        if dato["tipo"] == "pac":
+            for i in range(len(patients)):
+                if dato["usuario"] == patients[i].usuario:
+                    return HttpResponse([patients[i].nombre+","+patients[i].apellido+","+patients[i].fecha+","+
+                    patients[i].sexo+","+patients[i].telefono+","+patients[i].usuario+","+patients[i].contrasena])
+    else:
+        return render(request, "verpersona.html")
+def vermed(request):
+    if request.method == "POST":
+        dato = json.loads(request.body)
+        for i in range(len(medicines)):
+            if dato["nombre"] == medicines[i].nombre:
+                return HttpResponse([medicines[i].nombre+","+medicines[i].precio+","+medicines[i].descripcion+","
+                +medicines[i].cantidad])
+    else:
+        return render(request, "vermed.html")
+
+def home_doctor(request):
+    if request.method == "POST":
+        existencia = False
+        dato = json.loads(request.body)
+        for i in range(len(recetas)):
+            if dato["padecimiento"] == recetas[i].padecimiento:
+                recetas[i].veces += 1
+                existencia = True
+                break
+        if existencia == False:
+            recetas.append(Receta(dato["padecimiento"],1))
+        for i in range(len(recetas)):
+                print(recetas[i].padecimiento)
+                print(recetas[i].veces)
+        return HttpResponse("exito")
+    else:
+        return render(request, "doctor.html")

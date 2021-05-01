@@ -12,7 +12,7 @@
     <script type="text/javascript" src='{% static "js/jquery-1.7.2.min.js" %}'></script>
     <script type="text/javascript" src='{% static "js/admin.js" %}'></script>
 </head>
-<body>
+<body onload="javascript:cambiarPestanna(pestanas,pestana1);">
 <header id="encabezado">
     <a href="{% url 'administrador' %}">
         <div id="head-desc">
@@ -22,6 +22,14 @@
     </a>
     <a id="link-register" href="{% url 'admintabs' %}">Listas</a>
 </header>
+<section id="seccion">
+    <p id="par">
+        Nombre: {{admin.nombre}} <br>
+        Apellido: {{admin.apellido}} <br>
+        Usuario: {{admin.usuario}} <br>
+        Contraseña: {{admin.contrasena}}
+    </p>
+</section>
 <!---->
 <div class="contenedor">
     <div class="titulo">CARGA MASIVA DE DATOS</div>
@@ -32,10 +40,7 @@
             <li id="pestana3"><a href='javascript:cambiarPestanna(pestanas,pestana3);'>Cargar Pacientes</a></li>
             <li id="pestana4"><a href='javascript:cambiarPestanna(pestanas,pestana4);'>Cargar Medicinas</a></li>
         </ul>
-    </div>
-
-    <body onload="javascript:cambiarPestanna(pestanas,pestana1);">
-
+    </div> 
     <div id="contenidopestanas">
         <div id="cpestana1">
             <form id="archivos1" method="POST" enctype="multipart/form-data">{% csrf_token %}
@@ -62,5 +67,5 @@
             </form>
         </div>
     </div>
-    </body>
+</body>
 </html>

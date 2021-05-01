@@ -1,0 +1,87 @@
+body{
+    margin: 0;
+    padding: 0;
+    padding-top: 95px;
+    padding-bottom: 10%;
+    background-color:aliceblue;
+}
+#encabezado{
+    background-color: rgb(105, 105, 105);
+    position: fixed;
+    width: 100%;
+    height: 95px;
+    color: white;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    z-index: 10;
+}
+#encabezado a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+#head-desc{
+    float: left;
+    margin-left: 30px;
+}
+#nam-site{
+    display: block;
+    font-weight: 900;
+    font-size: xx-large;
+    padding: 7px;
+}
+#des-site{
+    display: block;
+    font-weight: 300;
+    font-size: larger;
+    padding: 6px;
+}
+#link-tabs{
+    float: right;
+    font-size: larger;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+/*seccion y formulario*/
+#seccionM{
+    width: 320px;
+    height: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid double;
+    border-color: #011f4b;
+}
+legend{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+#nombre,#apellido,#nacimiento,#sexo,#telefono,#usuario,#contrasena{
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 40px;
+    width: 250px;
+    height: 30px;
+    font-size: 18px;
+    border-style: solid double;
+    border-color: #005b96;
+    text-align: center;
+}
+#enviar{
+    width: 200px;
+    height: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-radius: 0.4em;
+    border-color: #005b96; 
+    cursor: pointer;
+}

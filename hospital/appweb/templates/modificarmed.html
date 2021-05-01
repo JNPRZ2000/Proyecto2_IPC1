@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Modificar Datos</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/marathon.png' %}">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "css/modificarmed.css" %}'>
+    <script type="text/javascript" src="{% static 'js/modificarmed.js' %}"></script>
+</head>
+<body>
+    <header id="encabezado">
+        <a onclick="volver()">
+            <div id="head-desc">
+                <span id="nam-site">Hospital Universitario</span>
+                <span id="des-site">Existiendo por la salud de todos</span>
+            </div>
+        </a>
+        <a id="link-tabs" onclick="volver()">Regresar</a>
+    </header>
+    <section id="seccionM">
+        <form id="formulario" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre" required 
+            title="Ingrese el nombre del medicamento">
+            <input type="number" name="precio" id="precio" placeholder="Precio" required 
+            title="Ingrese el precio del medicamento">
+            <textarea id="descripcion" name="descripcion" cols="30" rows="10" title="Descripción">                
+            </textarea>
+            <input type="number" name="cantidad" id="cantidad" placeholder="Cantidad" 
+            title="Ingrese la candidad del medicamento">
+            <input type="button" value="Modificar" id="enviar" onclick="actualizar()">
+        </form>
+    </section>
+</body>
+</html>

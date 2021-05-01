@@ -126,3 +126,18 @@ body{
     width: 1025px;
     height: auto;
 }
+#seccion{
+    border-color: #005b96;
+    border-radius: 0.4em;
+    border-style: solid groove;
+    border-width: 5px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-top: 30px;
+}
+#par{
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -46,41 +46,42 @@ body{
     margin-right: 30px;
     cursor: pointer;
 }
-#seccion1{
-    margin-top: 50px;
-    margin-bottom: 25px;
+/*seccion y formulario*/
+#seccionM{
+    width: 320px;
+    height: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
     margin-left: auto;
-    margin-right:auto;
-    border-color: #005b96;
-    border-style: solid ridge;
-    border-radius: 0.5em;
-    width: fit-content;
-    border-width: 5px;
-}
-#seccion2{
-    margin: 20px 25px;
-    width: 300px;
-    border-top-color: #011f4b;
-    border-style: solid dashed;
-    border-left: transparent;
-    border-right: transparent;
-
+    margin-right: auto;
+    border-style: solid double;
+    border-color: #011f4b;
 }
 legend{
-    margin-top: 15px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -10px;
 }
-#fecha,#paciente,#padecimiento{
-    width: 200px;
-}
-#descripcion{
-    resize: none;
-}
-#generar{
+#nombre,#precio,#descripcion,#cantidad{
     margin-top: 20px;
-    margin-bottom: 20px;
-    height: 28px;
-    width: 150px;
+    margin-left: 30px;
+    margin-right: 40px;
+    width: 250px;
+    height: 30px;
     font-size: 18px;
+    border-style: solid double;
     border-color: #005b96;
+    text-align: center;
+}
+#enviar{
+    width: 200px;
+    height: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-radius: 0.4em;
+    border-color: #005b96; 
     cursor: pointer;
 }

@@ -46,41 +46,29 @@ body{
     margin-right: 30px;
     cursor: pointer;
 }
-#seccion1{
-    margin-top: 50px;
-    margin-bottom: 25px;
+#seccion{
+    margin-top: 7%;
     margin-left: auto;
-    margin-right:auto;
-    border-color: #005b96;
-    border-style: solid ridge;
+    margin-right: auto;
+    margin-bottom: 7%;
+    width:max-content;
+    height: auto;
+    border-color: #011f4b;
+    border-style: solid double;
     border-radius: 0.5em;
-    width: fit-content;
-    border-width: 5px;
 }
 #seccion2{
-    margin: 20px 25px;
-    width: 300px;
-    border-top-color: #011f4b;
-    border-style: solid dashed;
-    border-left: transparent;
-    border-right: transparent;
-
+    margin: 30px 25px;
 }
-legend{
-    margin-top: 15px;
-}
-#fecha,#paciente,#padecimiento{
-    width: 200px;
-}
-#descripcion{
-    resize: none;
-}
-#generar{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    height: 28px;
+#volver{
     width: 150px;
-    font-size: 18px;
+    height: 30px;
+    font-size: 19px;
+    margin-top: 25px;
+    margin-right: 10%;
+    margin-bottom: 25px;
     border-color: #005b96;
     cursor: pointer;
+    border-radius: 0.4em;
+    float: right;
 }

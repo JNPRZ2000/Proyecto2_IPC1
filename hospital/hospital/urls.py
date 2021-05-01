@@ -23,5 +23,11 @@ urlpatterns = [
     path('registro/', views.registro, name="register"),
     path('administrador/', views.administracion, name = "administrador"),
     path('administrador/tabs/', views.admin_tabs, name="admintabs"),
-
+    path('modificar-doctor/',views.modify_doc, name="moddoc"),
+    path('modificar/',views.modify_ep, name="mod"),
+    path('modificar-medicina/', views.modify_med, name="modmed"),
+    path('ver-doctor/',views.verdoc, name="verdoc"),
+    path('ver-datos/', views.verep, name="verep"),
+    path('ver-medicina/', views.vermed, name="vermed"),
+    path('doctor/', views.home_doctor, name="doctor"),
 ]

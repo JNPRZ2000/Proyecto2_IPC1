@@ -39,7 +39,8 @@
 
     <div id="contenidopestanas">
         <div id="cpestana1">
-            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" onclick="imprimir('tabdoc','reporte doctores.pdf')">
+            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" 
+            onclick="imprimir('tabdoc','reporte doctores.pdf')">
             <table id="tabdoc">
                 <thead>
                     <tr>
@@ -55,8 +56,14 @@
                     <tr>
                         <td>{{ doc.nombre }}</td><td>{{ doc.apellido }}</td><td>{{ doc.usuario }}</td>
                         <td>{{ doc.especialidad }}</td>
-                        <td id="btn"><input type="button" class="ver" id="{{ doc.usuario }}+ver" value="Ver"></td>
-                        <td id="btn"><input type="button" class="modificar" id="{{ doc.usuario }}+mod" value="Modificar"></td>
+                        <td id="btn">
+                            <a href="{% url 'verdoc' %}?{{ doc.usuario }}">
+                                <input type="button" class="ver" id="{{ doc.usuario }}+ver" value="Ver">
+                            </a>
+                        </td>
+                        <td id="btn"><a href="{% url 'moddoc' %}?{{doc.usuario}}">
+                            <input type="button" class="modificar" id="{{ doc.usuario }}+mod" value="Modificar" ></a>
+                        </td>
                         <td id="btn"><input type="button" class="eliminar" id="{{ doc.usuario}}+del" 
                             value="Eliminar" onclick="eliminarD('{{ doc.usuario }}+del')"></td>
                     </tr>
@@ -80,8 +87,16 @@
                     {% for enf in enfermeras %}
                     <tr>
                         <td>{{ enf.nombre }}</td><td>{{ enf.apellido }}</td><td>{{ enf.usuario }}</td>
-                        <td id="btn"><input type="button" class="ver" id='{{ enf.usuario }}+ver' value="Ver"></td>
-                        <td id="btn"><input type="button" class="modificar" id='{{ enf.usuario }}+mod' value="Modificar"></td>
+                        <td id="btn">
+                            <a href="{% url 'verep' %}?{{ enf.usuario }}?enf">
+                                <input type="button" class="ver" id='{{ enf.usuario }}+ver' value="Ver">
+                            </a>
+                        </td>
+                        <td id="btn">
+                            <a href="{% url 'mod' %}?{{ enf.usuario }}?enf">
+                                <input type="button" class="modificar" id='{{ enf.usuario }}+mod' value="Modificar">
+                            </a>
+                        </td>
                         <td id="btn"><input type="button" class="eliminar" id='{{ enf.usuario}}+del' 
                             value="Eliminar" onclick="eliminarE('{{ enf.usuario }}+del')"></td>
                     </tr>
@@ -105,8 +120,16 @@
                     {% for pac in pacientes %}
                     <tr>
                         <td>{{ pac.nombre }}</td><td>{{ pac.apellido }}</td><td>{{ pac.usuario }}</td>
-                        <td id="btn"><input type="button" class="ver" id='{{ pac.usuario }}+ver' value="Ver"></td>
-                        <td id="btn"><input type="button" class="modificar" id='{{ pac.usuario }}+mod' value="Modificar"></td>
+                        <td id="btn">
+                            <a href="{% url 'verep' %}?{{ pac.usuario }}?pac">
+                                <input type="button" class="ver" id='{{ pac.usuario }}+ver' value="Ver">
+                            </a>
+                        </td>
+                        <td id="btn">
+                            <a href="{% url 'mod' %}?{{ pac.usuario }}?pac">
+                                <input type="button" class="modificar" id='{{ pac.usuario }}+mod' value="Modificar">
+                            </a>
+                        </td>
                         <td id="btn"><input type="button" class="eliminar" id='{{ pac.usuario}}+del' 
                             value="Eliminar" onclick="eliminarP('{{ pac.usuario }}+del')"></td>
                     </tr>
@@ -131,8 +154,16 @@
                     <tr>
                         <td>{{ med.nombre }}</td><td>{{ med.precio }}</td>
                         <td>{{ med.descripcion }}</td><td>{{ med.cantidad }}</td>
-                        <td id="btn"><input type="button" class="ver" id='{{ med.nombre }}+ver' value="Ver"></td>
-                        <td id="btn"><input type="button" class="modificar" id='{{ med.nombre }}+mod' value="Modificar"></td>
+                        <td id="btn">
+                            <a href="{% url 'vermed' %}?{{ med.nombre }}">
+                                <input type="button" class="ver" id='{{ med.nombre }}+ver' value="Ver">
+                            </a>
+                        </td>
+                        <td id="btn">
+                            <a href="{% url 'modmed' %}?{{ med.nombre }}">
+                                <input type="button" class="modificar" id='{{ med.nombre }}+mod' value="Modificar">
+                            </a>
+                        </td>
                         <td id="btn"><input type="button" class="eliminar" id='{{ med.nombre }}+del' 
                             value="Eliminar" onclick="eliminarM('{{ med.nombre }}+del')"></td>
                     </tr>

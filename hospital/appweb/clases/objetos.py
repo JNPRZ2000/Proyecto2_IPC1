@@ -1,5 +1,5 @@
 class Doctor:
-    def __init__(self, nom, ape, fec, sex, usu, cont, esp, tel):
+    def __init__(self, nom, ape, fec, sex, usu, cont, esp, tel, pos):
         self.nombre = nom
         self.apellido = ape
         self.fecha = fec
@@ -8,9 +8,12 @@ class Doctor:
         self.contrasena = cont
         self.especialidad = esp
         self.telefono = tel
-
+        self.posicion = pos
+    def to_string(self):
+        return "%s*%s*%s*%s*%s*%s*%s*%s*%s" %(self.nombre,self.apellido,self.fecha,self.sexo,self.usuario,self.contrasena,self.especialidad,self.telefono,self.posicion)
+        
 class Nurse:
-    def __init__(self, nom, ape, fec, sex, usu, cont, tel):
+    def __init__(self, nom, ape, fec, sex, usu, cont, tel, pos):
         self.nombre = nom
         self.apellido = ape
         self.fecha = fec
@@ -18,9 +21,12 @@ class Nurse:
         self.usuario = usu
         self.contrasena = cont
         self.telefono = tel
+        self.posicion = pos
+    def to_string(self):
+        return "%s*%s*%s*%s*%s*%s*%s*%s" %(self.nombre,self.apellido,self.fecha,self.sexo,self.usuario,self.contrasena,self.telefono,self.posicion)
 
 class Patient:
-    def __init__(self, nom, ape, fec, sex, usu, cont, tel):
+    def __init__(self, nom, ape, fec, sex, usu, cont, tel, pos):
         self.nombre = nom
         self.apellido = ape
         self.fecha = fec
@@ -28,6 +34,9 @@ class Patient:
         self.usuario = usu
         self.contrasena = cont
         self.telefono = tel
+        self.posicion = pos
+    def to_string(self):
+        return "%s*%s*%s*%s*%s*%s*%s*%s" %(self.nombre,self.apellido,self.fecha,self.sexo,self.usuario,self.contrasena,self.telefono,self.posicion)
 
 
 class Medicine:
@@ -43,3 +52,8 @@ class AdminWeb:
         self.apellido = "Golon"
         self.usuario = "admin"
         self.contrasena = "1234"
+
+class Receta:
+    def __init__(self, pad, vec):
+        self.padecimiento = pad
+        self.veces = vec

@@ -1,13 +1,43 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Home</title>
+    <title>Home - Receta</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/marathon.png' %}">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../static/design/doctor.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "css/doctor.css" %}'>
+    <script type="text/javascript" src="{% static 'js/doctor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/html2pdf.bundle.min.js' %}"></script>
 </head>
 <body>
-    
+    <header id="encabezado">
+        <a href="{% url 'doctor' %}">
+            <div id="head-desc">
+                <span id="nam-site">Hospital Universitario</span>
+                <span id="des-site">Existiendo por la salud de todos</span>
+            </div>
+        </a>
+        <a id="link-tabs" href="{% url 'doctor' %}">Citas</a>
+    </header>
+    <section id="verdoctor">
+    </section>
+    <section id="seccion1">
+        <legend style="text-align: center;">RECETA</legend>
+        <section id="seccion2">
+            <form id="formulario">{% csrf_token %}
+                <legend>Fecha</legend>
+                <input type="date" name="fecha" id="fecha" disabled>
+                <legend>Nombre de Paciente</legend>
+                <input type="text" name="paciente" id="paciente" placeholder="Paciente">
+                <legend>Padecimiento</legend>
+                <input type="text" name="padecimiento" id="padecimiento" placeholder="Padecimiento">
+                <legend>Descripción</legend>
+                <textarea name="descripcion" id="descripcion" cols="40" rows="20"></textarea>
+            </form>
+            <input type="button" id="generar" value="Generar" onclick="generarReceta()">
+        </section>
+    </section>
 </body>
 </html>
