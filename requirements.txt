@@ -1,5 +1,5 @@
 ﻿asgiref==3.2.3
-astroid==2.5.1
+astroid==1.6.6
 colorama==0.4.4
 Django==3.2
 isort==5.7.0
