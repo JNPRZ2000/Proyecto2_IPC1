@@ -44,13 +44,12 @@ body{
     margin-right: 30px;
 }
 .formulario{
-    background-color: #6497b1;
-    margin: auto;
-    margin-top: 35px;
-    margin-bottom: 35px;
+    margin-top: 25px;
     width: min-content;
     height: min-content;
-    border-radius: 2em;
+    border-radius: 0.7em;
+    border-color: #005b96;
+    border-style: solid groove;
 
 }
 #fecha,#paciente,#doctor,#consulta,#operacion,#internado,#resultado,#imprimir{
@@ -59,8 +58,10 @@ body{
     text-align: center;
     margin-left: 35px;
     margin-right: 35px;
-    margin-top: 30px;
     font-size: 16px;
+}
+#resultado{
+    margin-bottom: 20px;
 }
 #doctor{
     width: 207px;
@@ -73,12 +74,34 @@ body{
     border-radius: 0.5em;
     border-color: #011f4b;
     border-width: 3px;
-    border-style: solid dotted;
+    margin-left: 35px;
+    margin-top: 20px;
+    cursor: pointer;
 }
 legend{
     padding-top: 25px;
     text-align: center;
-    color: aliceblue;
+    color: #011f4b;
     font-size: 23px;
     font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+#leg{
+    margin-top: 15px;
+    text-align: center;
+}
+#seccion1{
+    width: fit-content;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    margin-bottom: 30px;
+    border-color: #011f4b;
+    border-radius: 0.4em;
+    border-style: solid ridge;
+}
+#seccion2{
+    margin-left: 20px;
+    margin-right: 20px;
 }

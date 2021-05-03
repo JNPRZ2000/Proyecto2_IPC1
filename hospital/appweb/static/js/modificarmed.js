@@ -20,10 +20,14 @@ var posicion;
 var nompos;
 function getParametros(){
     let ruta = new String(window.location);
-    const nombre = ruta.split("?");
-    nompos = nombre[1];
+    const usuario = ruta.split("?");
+    let re = /%20/g;
+    console.log(usuario[1])
+    let usuarioco = usuario[1].replace(re," ");
+    nompos = usuarioco;
+    console.log(usuarioco)
     let data = {
-        nombre: nombre[1]
+        nombre: usuarioco
     }
     console.log(data);
     fetch("/modificar-medicina/", {

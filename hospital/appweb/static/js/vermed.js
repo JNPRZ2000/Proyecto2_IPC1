@@ -21,8 +21,12 @@ var posUs;
 function getParametros(){
     let ruta = new String(window.location);
     const usuario = ruta.split("?");
+    let re = /%20/g;
+    console.log(usuario[1])
+    let usuarioco = usuario[1].replace(re," ");
+    console.log(usuarioco)
     let data = {
-        nombre: usuario[1],
+        nombre: usuarioco
     }
     console.log(data);
     fetch("/ver-medicina/", {

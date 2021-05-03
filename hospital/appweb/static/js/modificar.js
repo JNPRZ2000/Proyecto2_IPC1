@@ -21,15 +21,24 @@ var posUs;
 var tipoUs;
 var anterior;
 var usu;
+var ancestro;
 function getParametros(){
     let ruta = new String(window.location);
     const usuario = ruta.split("?");
+    let tipo;
+    ancestro = usuario[2];
+    if(usuario[2]=="enfe" || usuario[2] == "enf"){
+        tipo ="enf"
+    }
+    if(usuario[2] == "paci" || usuario[2] =="pac"){
+        tipo = "pac"
+    }
     anterior = usuario[3];
     let data = {
         usuario: usuario[1],
-        tipo: usuario[2]
+        tipo: tipo
     }
-    tipoUs = usuario[2];
+    tipoUs = tipo;
     console.log(data);
     fetch("/modificar/", {
         method: "POST",
@@ -226,9 +235,9 @@ function senMod(inf){
     )
 }
 function redireccionar(){
-    if(anterior == "enfer"){
+    if(ancestro == "enfe"){
         window.location.href = ("/doctor/"+"?"+posicion+"?"+usu)
-    }else if(anterior == "pacie"){
+    }else if(ancestro == "paci"){
         window.location.href = ("/paciente/"+"?"+posicion+"?"+usu)
     }else{
         window.location.href = ("/administrador/tabs/")

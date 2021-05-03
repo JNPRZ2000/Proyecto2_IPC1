@@ -48,6 +48,7 @@ function solicitudBuscar(usuario,contrasena){
                 function(dat){
                     console.log(dat)
                     let lis = dat.replace(/\r/g,'').split("-")
+                    console.log(lis)
                     if(lis[0] == "noexiste"){
                         alert("verifique sus credenciales")
                     }else{

@@ -43,28 +43,28 @@ def login(request):
 def searchup(usuario,contrasena):
     tipo = "noexiste"
     continuar = True
-    cDo = 0
-    cEn = 0
-    cPa = 0
+    cdo = 0
+    cen = 0
+    cpa = 0
     indice = -1
-    while continuar == True and cDo < len(doctors):
-        if usuario == doctors[cDo].usuario and contrasena == doctors[cDo].contrasena:
-            indice = cDo
+    while continuar == True and cdo < len(doctors):
+        if usuario == doctors[cdo].usuario and contrasena == doctors[cdo].contrasena:
+            indice = cdo
             tipo = "doc"
             continuar = False
-        cDo += 1
-    while continuar == True and cEn < len(doctors):
-        if usuario == doctors[cEn].usuario and contrasena == doctors[cEn].contrasena:
-            indice = cEn
+        cdo += 1
+    while continuar == True and cen < len(nurses):
+        if usuario == nurses[cen].usuario and contrasena == nurses[cen].contrasena:
+            indice = cen
             tipo = "enf"
             continuar = False
-        cEn += 1
-    while continuar == True and cPa < len(doctors):
-        if usuario == doctors[cPa].usuario and contrasena == doctors[cPa].contrasena:
-            indice = cPa
+        cen += 1
+    while continuar == True and cpa < len(patients):
+        if usuario == patients[cpa].usuario and contrasena == patients[cpa].contrasena:
+            indice = cpa
             tipo = "pac"
             continuar = False
-        cPa += 1    
+        cpa += 1    
     return [tipo,indice]
 
 
@@ -106,7 +106,7 @@ def registro(request):
             telefono = datos["telefono"]
             username = datos["usuario"]
             contrasena = datos["contraseña"]
-            patients.append(Patient(nombre,apellido,fecha,genero,username,contrasena,telefono))
+            patients.append(Patient(nombre,apellido,fecha,genero,username,contrasena,telefono,len(patients)))
             for i in range(len(patients)):
                 print(i)
                 print(patients[i].usuario)
@@ -197,8 +197,41 @@ def admin_tabs(request):
         eliminar(datos["tipo"],datos["elemento"])
         return HttpResponse("eliminado")
     else:
+        for i in range(len(recetas)-1,0,-1):
+            for j in range(i):
+                if recetas[j].veces>recetas[j+1].veces:
+                    temp = recetas[j]
+                    recetas[j] = recetas[j+1]
+                    recetas[j+1] = temp
+        lispad = []
+        if len(recetas) == 1:
+            lispad.append(recetas[0])
+        elif len(recetas) == 2:
+            lispad.append(recetas[1])
+            lispad.append(recetas[0])
+        elif len(recetas) == 3:
+            lispad.append(recetas[2])
+            lispad.append(recetas[1])
+            lispad.append(recetas[0])
+        elif len(recetas) == 4:
+            lispad.append(recetas[3])
+            lispad.append(recetas[2])
+            lispad.append(recetas[1])
+            lispad.append(recetas[0]) 
+        elif len(recetas) == 5:
+            lispad.append(recetas[4])
+            lispad.append(recetas[3])
+            lispad.append(recetas[2])
+            lispad.append(recetas[1])
+            lispad.append(recetas[0])
+        elif len(recetas)>5:
+            lispad.append(recetas[len(recetas)-1])
+            lispad.append(recetas[len(recetas)-2])
+            lispad.append(recetas[len(recetas)-3])
+            lispad.append(recetas[len(recetas)-4])
+            lispad.append(recetas[len(recetas)-5])  
         return render(request, "tablas_administrador.html",
-        {'doctores': doctors,'enfermeras': nurses,'pacientes': patients,'medicinas':medicines})
+        {'doctores': doctors,'enfermeras': nurses,'pacientes': patients,'medicinas':medicines,'recetas':lispad})
 def eliminar(tipo,elemento):
     if tipo == "doc":
         for i in range (len(doctors)):
@@ -340,8 +373,7 @@ def vermed(request):
         dato = json.loads(request.body)
         for i in range(len(medicines)):
             if dato["nombre"] == medicines[i].nombre:
-                return HttpResponse([medicines[i].nombre+","+medicines[i].precio+","+medicines[i].descripcion+","
-                +medicines[i].cantidad])
+                return HttpResponse(medicines[i].to_string())
     else:
         return render(request, "vermed.html")
 
@@ -362,3 +394,16 @@ def home_doctor(request):
         return HttpResponse("exito")
     else:
         return render(request, "doctor.html")
+
+def home_nurse(request):
+    if request.method == "POST":
+        print("hola enfermera")
+    else:
+        return render(request, "enfermera.html")
+def factura_nurse(request):
+    return render(request, "enfermera_factura.html",{"doctores": doctors})
+def home_patient(request):
+    if request.method == "POST":
+        print("Hola paciente")
+    else:
+        return render(request, "paciente.html")

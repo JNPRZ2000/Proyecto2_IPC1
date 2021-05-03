@@ -33,6 +33,7 @@
             <li id="pestana2"><a href='javascript:cambiarPestanna(pestanas,pestana2);'>Enfermería</a></li>
             <li id="pestana3"><a href='javascript:cambiarPestanna(pestanas,pestana3);'>Pacientes</a></li>
             <li id="pestana4"><a href='javascript:cambiarPestanna(pestanas,pestana4);'>Medicinas</a></li>
+            <li id="pestana5"><a href="javascript:cambiarPestanna(pestanas,pestana5);">Top 5: Padecimientos</a></li>
         </ul>
     </div>
 
@@ -168,6 +169,25 @@
                             value="Eliminar" onclick="eliminarM('{{ med.nombre }}+del')"></td>
                     </tr>
                 {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="cpestana5">
+            <input type="button" name="reporte" id="reporte" value="Descargar Reporte PDF" 
+            onclick="imprimir('tabrec','reporte padecimientos.pdf')">
+            <table id="tabrec">
+                <thead>
+                    <tr>
+                        <th id="titulo">Padecimiento</th><th id="titulo">Recurrencia</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in recetas %}
+                        <tr>
+                            <td>{{ rec.padecimiento }}</td><td>{{ rec.veces }}</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

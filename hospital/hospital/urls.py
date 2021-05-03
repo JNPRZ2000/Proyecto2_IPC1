@@ -30,4 +30,7 @@ urlpatterns = [
     path('ver-datos/', views.verep, name="verep"),
     path('ver-medicina/', views.vermed, name="vermed"),
     path('doctor/', views.home_doctor, name="doctor"),
+    path('enfermeria/', views.home_nurse, name="enfermera"),
+    path('enfermeria/factura/',views.factura_nurse, name="factura"),
+    path('paciente/', views.home_patient, name="paciente"),
 ]

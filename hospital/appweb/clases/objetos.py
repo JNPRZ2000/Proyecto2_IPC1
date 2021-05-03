@@ -45,6 +45,8 @@ class Medicine:
         self.precio = prec
         self.descripcion = desc
         self.cantidad = can
+    def to_string(self):
+        return "%s,%s,%s,%s" %(self.nombre,self.precio,self.descripcion,self.cantidad)
 
 class AdminWeb:
     def __init__(self):

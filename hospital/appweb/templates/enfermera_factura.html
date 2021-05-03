@@ -1,37 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Facturación</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/marathon.png' %}">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../static/design/enfermera_factura.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "css/enfermera_factura.css" %}'>
+    <script type="text/javascript" src="{% static 'js/enfermera_factura.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/html2pdf.bundle.min.js' %}"></script>
 </head>
 <body>
     <header id="encabezado">
-        <a href="enfermera.html">
+        <a onclick="volver()">
             <div id="head-desc">
                 <span id="nam-site">Hospital Universitario</span>
                 <span id="des-site">Existiendo por la salud de todos</span>
             </div>
         </a>
-        <a id="link-home" href="enfermera.html">Home</a>
+        <a id="link-home" onclick="volver()">Home</a>
     </header>
-    <form class="formulario" action="" oninput="resultado.value = parseFloat(consulta.value)+parseFloat(operacion.value)+ parseFloat(internado.value)">
-        <legend>FACTURACION</legend>
-        <input type="date" name="fecha" id="fecha" disabled>
-        <script>
-            document.querySelector("#fecha").valueAsDate = new Date();
-        </script>
-        <input type="text" name="paciente" id="paciente" placeholder="Paciente" required>
-        <select name="doctor" id="doctor" aria-placeholder="Doctor">
-            <option disabled selected>Seleccione un doctor</option>
-        </select>
-        <input type="number" name="consulta" id="consulta" min="0" placeholder="Costo de consulta" required>
-        <input type="number" name="operacion" id="operacion" min="0" placeholder="Costo de operación">
-        <input type="number" name="internado" id="internado" min="0" placeholder="Costo de internado">
-        <input type="number" name="resultado" id="resultado" min="0" placeholder="Costo Total" required>
-        <input type="submit" name="imprimir" id="imprimir" value="Imprimir">
-    </form>
+    <section id="seccion1">
+        <section id="seccion2">
+            <form class="formulario" action="" oninput="resultado.value = parseFloat(consulta.value)+parseFloat(operacion.value)+ parseFloat(internado.value)">
+                <legend>FACTURA</legend>
+                <legend id="leg">Fecha</legend>
+                <input type="date" name="fecha" id="fecha" disabled>
+                <legend id="leg">Paciente</legend>
+                <input type="text" name="paciente" id="paciente" placeholder="Paciente" required>
+                <legend id="leg">Doctor</legend>
+                <select name="doctor" id="doctor" aria-placeholder="Doctor">
+                    <option value="nulo" selected disabled>Seleccione un doctor</option>
+                    {% for doc in doctores %}
+                        <option value="{{ doc.nombre }}">{{doc.nombre}} {{doc.apellido}}</option>
+                    {% endfor %}
+                </select>
+                <legend id="leg">Costo de Consulta</legend>
+                <input type="number" name="consulta" id="consulta" min="0" placeholder="Costo de consulta" required>
+                <legend id="leg">Costo de Operación</legend>
+                <input type="number" name="operacion" id="operacion" min="0" placeholder="Costo de operación" value="0">
+                <legend id="leg">Costo de Internado</legend>
+                <input type="number" name="internado" id="internado" min="0" placeholder="Costo de internado" value="0">
+                <legend id="leg">Total</legend>
+                <input type="number" name="resultado" id="resultado" min="0" placeholder="Costo Total" required>
+            </form>
+        </section>
+        <input type="button" name="imprimir" id="imprimir" value="Imprimir" onclick="imprimir()">
+    </section>
 </body>
 </html>
